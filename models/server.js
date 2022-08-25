@@ -8,6 +8,8 @@ class Server{
         
         this.app = express();
 
+        this.app.set('trust proxy', true);
+
         this.urlApi = {
             contactos: "/contactos"
         }
@@ -19,6 +21,7 @@ class Server{
     }
 
     routes(){
+        this.app.use("/*", (req, res) => res.status(404).json());
         this.app.use(this.urlApi.contactos, router);
     }
 
